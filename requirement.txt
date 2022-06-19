@@ -1,0 +1,10 @@
+openpyxl
+six
+lxml
+conf
+gensim==3.*
+scipy
+nltk
+xlsxwriter
+elasticsearch
+websockets

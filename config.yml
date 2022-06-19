@@ -1,0 +1,9 @@
+exp_posts_dir: ./exp_posts_dir
+exp_models_dir: ./exp_models_dir
+exp_manual_dir: ./exp_manual_dir
+so_dir: so
+superuser_dir: superuser
+exp_manual_dir: exp_manual
+askubuntu_dir: askubuntu
+unixlinux_dir: unixlinux
+exp_evaluation_dir: ./exp_evaluation_dir

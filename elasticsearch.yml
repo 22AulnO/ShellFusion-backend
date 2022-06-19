@@ -1,0 +1,19 @@
+cluster.name: "docker-cluster"
+
+xpack.security.enabled: false
+opendistro_security.disabled: true
+discovery.type: single-node
+discovery.seed_hosts: false
+cluster.initial_master_nodes: false
+
+index.number_of_shards: 5
+index.number_of_replicas: 0
+network.host: 0.0.0.0
+index.refresh_interval: 1s
+index.number_of_replicas: 0
+index.translog.flush_threshold_ops: 50000
+index.translog.flush_threshold_size: 4gb
+indices.store.throttle.max_bytes_per_sec: 512mb
+threadpool.bulk.type: fixed
+threadpool.bulk.size: 12
+threadpool.bulk.queue_size: 200000
