@@ -9,9 +9,9 @@ pip install -r requirement.txt
 ## **prepare data**
 ```bash
 #work in the root directory of this repository
-wget http://211.66.130.46:20004/exp_manual.tgz
-wget http://211.66.130.46:20004/exp_models_dir.tgz
-wget http://211.66.130.46:20004/exp_posts_dir.tgz
+wget http://8.134.73.140:30021/exp_manual.tgz
+wget http://8.134.73.140:30021/exp_models_dir.tgz
+wget http://8.134.73.140:30021/exp_posts_dir.tgz
 
 tar -xvf *.tgz
 rm -rf *.tgz
