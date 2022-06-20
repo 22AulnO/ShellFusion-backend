@@ -148,11 +148,21 @@ def full_generate_online(queries_dict, embed_topn_dir, qid_info_dict, cmd_info_d
                             op_cdesc_dict[op].add(sen + '.')
 
             op_desc_dict, top3_op_desc_dict = mid_dict['Option-Description'], {}
+            #TODO: add condition check
+            has_manual = False
+            has_explan = False
             for op in top3_ops:
                 if op in op_desc_dict:
-                    top3_op_desc_dict[op + '(M)'] = op_desc_dict[op]
-                if op in op_cdesc_dict:
-                    top3_op_desc_dict[op + '(C)'] = ' '.join(op_cdesc_dict[op])
+                    #top3_op_desc_dict[op + '(M)'] = op_desc_dict[op]
+                    top3_op_desc_dict[op] = op_desc_dict[op]
+                    has_manual = True
+                    has_explan = True
+                if op in op_cdesc_dict and not has_manual:
+                    #top3_op_desc_dict[op + '(C)'] = ' '.join(op_cdesc_dict[op])
+                    top3_op_desc_dict[op] = ' '.join(op_cdesc_dict[op])
+                    has_explan = True
+            if not has_explan:
+                top3_op_desc_dict = {}
             if top3_scripts == []:
                 top3_scripts = [x.split(":")[0]+" :" for x in top3_qtitles]
             generated_answers.append({
@@ -204,82 +214,7 @@ def detectOpsInTLDRScript(script):
                 ops.add('-' + token[j])
     return ops
 
-'''
-#5-15更新，以下旧版
-def full_generate_online(queries_dict, embed_topn_dir, qid_info_dict, k, res_dir):
-    """
-    Generate answers for queries.
-    """
-    if not os.path.exists(res_dir):
-        os.makedirs(res_dir)
 
-    #queries_dict = readQueries(queries_txt)
-
-    start = time.time()
-    total_time = 0
-    query_id = 0
-    for name in os.listdir(embed_topn_dir):
-        if name[-3:] != 'txt': continue
-        #query_id = name[:name.rfind('.')]
-        
-        qid_sim_dict, cmd_qids_dict = {}, {}
-
-        for line in readTxt(embed_topn_dir + '/' + name):
-            sa = line.split(' ===> ')
-            if len(sa) == 3:
-                qid = sa[0]
-                if qid in qid_info_dict:
-                    qid_sim_dict[qid] = float(sa[2].strip())
-                    accans = qid_info_dict[qid]['AcceptedAnswer']
-                    candi_cmds = accans['ShellFusion Command-Options']
-                    for cmd in candi_cmds:
-                        if cmd not in cmd_qids_dict:
-                            cmd_qids_dict[cmd] = set()
-                        cmd_qids_dict[cmd].add(qid)
-
-        """ rank the candidate commands """
-        cmd_likelihood_dict = {}
-        for cmd in cmd_qids_dict:
-            n = len(cmd_qids_dict[cmd])
-            simso = sum([ qid_sim_dict[qid] for qid in cmd_qids_dict[cmd] ]) / n * math.log2(1+n)
-            cmd_likelihood_dict[cmd] = simso
-
-        # generate answer for each candidate cmd
-        generated_answers = []  # generated answer for each candidate cmd
-        sorted_qids = [ item[0] for item in sorted(qid_sim_dict.items(), key=lambda x:x[1], reverse=True) ]
-        for item in sorted(cmd_likelihood_dict.items(), key=lambda x:x[1], reverse=True)[:k]:
-
-            cmd = item[0]
-
-            """ Top-3 Similar Questions with Accepted Scripts """
-            top3_qtitles, top3_scripts = [], []
-            for qid in sorted_qids:
-                if qid in cmd_qids_dict[cmd]:
-                    if len(top3_qtitles) < 3:
-                        top3_qtitles.append(qid + ': ' + qid_info_dict[qid]['Title'])
-                    if len(top3_scripts) < 3:
-                        accans, scripts = qid_info_dict[qid]['AcceptedAnswer'], []
-                        ind_scriptcmdsops_dict = accans['Command-Options in Scripts']
-                        for _item in sorted(ind_scriptcmdsops_dict.items(), key=lambda x:int(x[0])):
-                            script, cmd_ops_dict = _item[1]['Script'][2:], _item[1]['ShellFusion Command-Options']
-                            if cmd != script and cmd in cmd_ops_dict and len(script.split('\n')) <= 10:
-                                scripts.append(script)
-                        scripts = '\n\n'.join(scripts).replace('&amp;', '&').replace('&gt;', '>').\
-                            replace('&lt;', '<').replace('&quot;', '"').replace('&nbsp;', ' ').strip('\n ')
-                        if scripts != '':
-                            top3_scripts.append(qid + ': ' + scripts)
-
-            generated_answers.append({
-                'Command': cmd, 'Top-3 Similar Questions': top3_qtitles,
-                'Top-3 Scripts': top3_scripts
-            })
-
-        result_json = { 'Query': queries_dict['Query'], 'Answers': generated_answers }
-        query_id += 1
-    total_time = time.time()-start
-    print(f"generate Time is {total_time}")
-    return result_json
-'''
 def full_generate(queries_dict, embed_topn_dir, QAPairs_det_json, k, res_dir):
     """
     Generate answers for queries.
