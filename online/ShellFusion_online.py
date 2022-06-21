@@ -162,7 +162,7 @@ def full_generate_online(queries_dict, embed_topn_dir, qid_info_dict, cmd_info_d
                     top3_op_desc_dict[op] = ' '.join(op_cdesc_dict[op])
                     has_explan = True
             if not has_explan:
-                top3_op_desc_dict = {}
+                top3_op_desc_dict = {"":"{}"}
             if top3_scripts == []:
                 top3_scripts = [x.split(":")[0]+" :" for x in top3_qtitles]
             generated_answers.append({
