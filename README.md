@@ -16,12 +16,6 @@ wget http://8.134.73.140:30021/exp_posts_dir.tgz
 tar -xvf *.tgz
 rm -rf *.tgz
 ```
-## **train w2v models and generate IDF vocabulary**
-```bash
-#work in the root directory of this repository
-python offline/w2v_trainer.py --config config.yml
-python offline/tfidf_trainer.py --config config.yml
-```
 
 ## **deploy elasticsearch and build elasticsearch index**
 ```bash
