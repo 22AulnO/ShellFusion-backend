@@ -10,3 +10,4 @@ elasticsearch
 websockets
 json
 asyncio
+demjson
