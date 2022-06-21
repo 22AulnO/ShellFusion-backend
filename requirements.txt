@@ -8,3 +8,5 @@ nltk
 xlsxwriter
 elasticsearch
 websockets
+json
+asyncio
