@@ -4,7 +4,7 @@ This repository is the backend module of ShellFusion. To deploy the backend, ple
 <br>Moreover, on deploying the backend, we found that **16GB of memory** is needed to finish the workflow.
 ## **install requirement packages**
 ```bash
-pip install -r requirement.txt
+pip install -r requirements.txt
 ```
 ## **prepare data**
 ```bash
