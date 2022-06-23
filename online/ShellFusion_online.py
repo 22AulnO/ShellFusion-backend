@@ -175,8 +175,8 @@ def full_generate_online(queries_dict, embed_topn_dir, qid_info_dict, cmd_info_d
         result_json = { 'Query': queries_dict['Query'], 'Answers': generated_answers }
         query_id += 1
         query_failsafe = True
-    total_time = time.time()-start
-    print(f"generate Time is {total_time}")
+    #total_time = time.time()-start
+    #print(f"generate Time is {total_time}")
     if result_json["Answers"]==[]: return {'Query': queries_dict['Query'], 'Answers': "Empty"} 
     return result_json
 
