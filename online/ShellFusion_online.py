@@ -163,8 +163,11 @@ def full_generate_online(queries_dict, embed_topn_dir, qid_info_dict, cmd_info_d
                     has_explan = True
             if not has_explan:
                 top3_op_desc_dict = {"":"{}"}
-            if top3_scripts == []:
-                top3_scripts = [x.split(":")[0]+" :" for x in top3_qtitles]
+            if len(top3_qtitles) != len(top3_scripts):
+                all_id = {x.split(":")[0]+": " for x in top3_qtitles}
+                part_id = {x.split(":")[0]+": " for x in top3_scripts}
+                not_present_scripts = all_id - part_id
+                top3_scripts += list(not_present_scripts)
             generated_answers.append({
                 'Command': cmdname, 'MP Summary': mpsumm,
                 'Most Similar TLDR Task': mostsim_task, 'Most Similar TLDR Script': mostsim_script,
