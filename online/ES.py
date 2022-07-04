@@ -100,7 +100,7 @@ def search(s, res_txt):
 if __name__ == '__main__':
 
     # need to start the elasticsearch serive in cmd line
-    _lucene_docs_txt = conf.exp_models_dir + './lucene_docs.txt'
+    _lucene_docs_txt = conf.exp_models_dir + '/lucene_docs.txt'
     #_lucene_docs_txt = './lucene_docs.txt'
     _query = 'increas partit size'
     #_res_txt = conf.exp_evaluation_dir + '/1.txt'
