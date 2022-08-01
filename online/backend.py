@@ -3,13 +3,12 @@ import asyncio
 from query_preprocesser import preprocess
 import sys
 from SimQ_retriever import fullQuery_retrieve_online,w2v_trainer,readTransformLuceneDocs
-sys.path.append("~/shellfusion_backend/offline")
-sys.path.append("~/shellfusion_backend/online")
+import os
+sys.path.append(os.getcwd())
 from offline.file_utils import *
 import json
 from ES import doQuery
 import conf
-import os
 from ShellFusion_online import full_generate_online
 from ShellFusion_online import readCmdInfo
 import time
@@ -57,7 +56,7 @@ async def main_logic(websocket, path):
     await recv_query(websocket)
 
 #opening_Query = "Move all files with a certain extension from multiple subdirectories into one directory"
-pening_Query = "How to extract the first two characters of a string in shell scripting?"
+opening_Query = "How to extract the first two characters of a string in shell scripting?"
 print(demjson.encode(startup(opening_Query)))
 start_server = websockets.serve(main_logic,'0.0.0.0',20004)
 asyncio.get_event_loop().run_until_complete(start_server)

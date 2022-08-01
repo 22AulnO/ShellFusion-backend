@@ -2,8 +2,8 @@
 from query_preprocesser import preprocess
 import sys
 from SimQ_retriever import fullQuery_retrieve_online,w2v_trainer
-sys.path.append("~/shellfusion_backend/offline")
-sys.path.append("~/shellfusion_backend/online")
+import os
+sys.path.append(os.getcwd())
 from offline.file_utils import *
 from ES import doQuery
 import conf

@@ -1,7 +1,7 @@
 import os
 import time
 import sys
-sys.path.append("..")
+sys.path.append(os.getcwd())
 
 from offline import w2v_trainer
 from conf import conf

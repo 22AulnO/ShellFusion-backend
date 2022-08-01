@@ -11,3 +11,4 @@ websockets
 json
 asyncio
 demjson
+beautifulsoup4

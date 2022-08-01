@@ -4,7 +4,8 @@ import time
 from nltk import sent_tokenize, word_tokenize
 from nltk.corpus import stopwords
 import sys
-sys.path.append("~/shellfusion_backend")
+import os
+sys.path.append(os.getcwd())
 from offline.post_preprocessor import porter_stemmer
 
 eng_stopwords = set()
