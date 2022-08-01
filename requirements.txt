@@ -8,7 +8,6 @@ nltk
 xlsxwriter
 elasticsearch
 websockets
-json
 asyncio
 demjson
 beautifulsoup4
