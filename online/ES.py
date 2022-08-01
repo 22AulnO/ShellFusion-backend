@@ -5,6 +5,7 @@ from elasticsearch import helpers
 #import socket
 from conf import conf
 import nltk
+import os
 #from offline.file_utils import readTxt
 
 """
@@ -111,6 +112,8 @@ if __name__ == '__main__':
     indexDocs(_lucene_docs_txt)
     nltk.download('stopwords')
     nltk.download('punkt')
+    os.system('mkdir -p ./exp_evaluation_dir/lucene_topN_online')
+    os.system('mkdir -p ./exp_evaluation_dir/embed_topn_online')
     print("Index built.")
     #search(_query, _res_txt)
     #print(time.time() - start, 's')  # 20.193s
