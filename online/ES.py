@@ -114,6 +114,8 @@ if __name__ == '__main__':
     nltk.download('punkt')
     os.system('mkdir -p ./exp_evaluation_dir/lucene_topN_online')
     os.system('mkdir -p ./exp_evaluation_dir/embed_topn_online')
+    os.system('rm -rf ./exp_evaluation_dir/lucene_topN_online/*')
+    os.system('rm -rf ./exp_evaluation_dir/embed_topn_online/*')
     print("Index built.")
     #search(_query, _res_txt)
     #print(time.time() - start, 's')  # 20.193s
